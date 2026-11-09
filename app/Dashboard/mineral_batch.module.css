@@ -1,0 +1,351 @@
+/* ===== Register a new batch (Figma "New Batch") ===== */
+
+.page {
+  font-family: inherit;
+  box-sizing: border-box;
+  /* Design tokens defined here so this file doesn't depend on globals.css */
+  --card-border: #8a85b8;
+  --field-border: #8a85b8;
+  --accent: #10c29b;
+  --sidebar-bg: #25205f;
+  --row-divider: #c9c6e3;
+
+  background: #fff;
+}
+
+.page h1 {
+  margin: 0 0 24px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000;
+}
+
+/* ---------- Two cards: 1:1 ratio, 36px gap, identical height ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 36px;
+  align-items: stretch;
+}
+
+.card {
+  min-height: 459px;
+  background: #fff;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+}
+
+/* ---------- Left card: two columns of fields ---------- */
+.formCard {
+  padding: 16px 25px 28px 20px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 45px;
+  align-items: start;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-width: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 16px;
+  color: #000;
+}
+
+/* 241 x 42, thin purple outline */
+.control {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  background: #fff;
+  border: 1px solid var(--field-border);
+  border-radius: 7px;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(16, 194, 155, 0.2);
+}
+
+.control:disabled {
+  background: #f6f6fb;
+  cursor: not-allowed;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap .control {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 42px;
+  cursor: pointer;
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #000;
+}
+
+/* ---------- Right card: QR ---------- */
+.qrCard {
+  padding: 46px 33px 36px;
+  font-size: 13px;
+  color: #000;
+}
+
+/* The three text lines sit 11px further in than the QR image */
+.qrMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 11px;
+}
+
+.qrMeta p {
+  margin: 0;
+  line-height: 16px;
+}
+
+.qrTitle {
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.qrText {
+  font-weight: 400;
+}
+
+.qr {
+  display: block;
+  margin-top: 34px;
+  line-height: 0;
+}
+
+.qr img {
+  display: block;
+  width: 165px;
+  height: 165px;
+}
+
+/* Shown until the backend has created the batch and its QR */
+.qrPlaceholder {
+  width: 165px;
+  height: 165px;
+  line-height: 0;
+  background: #fff;
+}
+
+.qrPlaceholder svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 197 x 50, navy outline */
+.share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 197px;
+  height: 50px;
+  margin-top: 49px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  background: #fff;
+  border: 2px solid var(--sidebar-bg);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.share:hover:not(:disabled) {
+  background: #f4f3fb;
+}
+
+.share:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* ---------- Status messages ---------- */
+.success {
+  margin: 20px 0 0;
+  color: #0b7a5a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.error {
+  margin: 20px 0 0;
+  color: #b3261e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---------- Buttons: 217 / 182 / 218 wide, 50 tall, 39px apart ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin-top: 80px;
+}
+
+.skip,
+.cancel,
+.record {
+  height: 50px;
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.skip:hover:not(:disabled),
+.cancel:hover:not(:disabled),
+.record:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.skip:disabled,
+.cancel:disabled,
+.record:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.skip {
+  min-width: 217px;
+  color: #000;
+  background: #fff;
+  border: 2px solid var(--accent);
+}
+
+.cancel {
+  min-width: 182px;
+  color: #fff;
+  background: #6f6f6f;
+  border: none;
+}
+
+.record {
+  min-width: 218px;
+  color: #fff;
+  background: var(--sidebar-bg);
+  border: none;
+}
+
+.skip:focus-visible,
+.cancel:focus-visible,
+.record:focus-visible,
+.share:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Form controls ---------- */
+.page button,
+.page input,
+.page select {
+  font-family: inherit;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+/* Figma shows empty-looking fields: hide number spinners and the
+   "mm/dd/yyyy" hint until the date is focused or filled in. */
+.control[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.control[type="number"]::-webkit-outer-spin-button,
+.control[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.control[type="date"]:invalid:not(:focus)::-webkit-datetime-edit {
+  color: transparent;
+}
+
+/* ---------- Smaller screens ---------- */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 0;
+  }
+
+  .actions {
+    margin-top: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page h1 {
+    font-size: 22px;
+  }
+
+  .fields {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .qrCard {
+    padding: 28px 24px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .skip,
+  .cancel,
+  .record {
+    width: 100%;
+  }
+}

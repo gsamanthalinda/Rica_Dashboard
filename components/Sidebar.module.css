@@ -1,0 +1,136 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  height: 100vh;
+  background: #25225f;
+  color: #ffffff;
+}
+
+/* ---------- Logo ---------- */
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 150px;
+  padding-top: 38px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.top img {
+  display: block;
+  width: 92px;
+  height: auto;
+}
+
+/* ---------- Items: solid icon above a white label ---------- */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 0 16px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+/* Fixed square size, so an icon can never be squeezed or stretched. */
+.bigIcon {
+  display: block;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+}
+
+.smallIcon {
+  display: block;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+}
+
+.item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.active,
+.active:hover {
+  background: #0cc39b;
+}
+
+/* ---------- Bottom: one full-width line, then Settings ---------- */
+.bottom {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 18px 24px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.rowActive {
+  color: #0cc39b;
+}
+
+.sidebar a:focus-visible,
+.sidebar button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: -3px;
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    width: 96px;
+  }
+  .top {
+    height: 110px;
+    padding-top: 28px;
+  }
+  .top img {
+    width: 64px;
+  }
+  .item {
+    padding: 14px 0 12px;
+    font-size: 0.72rem;
+  }
+  .bigIcon {
+    width: 30px;
+    height: 30px;
+  }
+  .row {
+    padding: 16px 12px;
+    gap: 8px;
+    font-size: 0.72rem;
+  }
+}

@@ -1,0 +1,54 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  /* only one child (.right), so space-between would leave it on the left */
+  justify-content: flex-end;
+  padding: 8px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.recordBtn {
+  padding: 6px 12px;
+  background: #22c55e;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* circular avatar like the design: navy disc, teal person icon */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #262060;
+  color: #0ac49b;
+}
+
+.userName {
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+}

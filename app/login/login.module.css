@@ -1,0 +1,230 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  background: #ffffff;
+  color: #1b1a45;
+  font-family:
+    "Instrument Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  padding: 56px 56px 48px;
+  background: #25225f;
+  color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.logoImg {
+  width: 140px;
+  height: auto;
+  margin-bottom: 24px;
+}
+
+.logo {
+  margin: 0;
+  color: #0cc39b;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.message {
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 460px;
+}
+
+.message h1 {
+  margin: 0 0 24px;
+  color: #0cc39b;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.message p {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.45;
+}
+
+.dots {
+  display: flex;
+  gap: 14px;
+}
+
+.dots span {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+.dots .dotActive {
+  background: #0cc39b;
+  border-color: #0cc39b;
+}
+
+.formSide {
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.form {
+  width: 100%;
+  max-width: 300px;
+}
+
+.form h2 {
+  margin: 0 0 56px;
+  text-align: center;
+  color: #0cc39b;
+  font-size: 2rem;
+}
+
+.form label {
+  display: block;
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.form input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  padding: 12px 14px;
+  font: inherit;
+  color: #1b1a45;
+  background: #ffffff;
+  border: 1px solid #d5d8e0;
+  border-radius: 8px;
+}
+
+.form input::placeholder {
+  color: #4b4b6b;
+  font-size: 0.85rem;
+}
+
+.forgot {
+  display: block;
+  margin: -16px 0 0;
+  text-align: right;
+  color: #1b1a45;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.error {
+  margin: 20px 0 0;
+  padding: 10px 12px;
+  color: #a4401f;
+  background: #fbefe9;
+  border-left: 4px solid #a4401f;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 40px;
+  padding: 14px;
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #25225f;
+  border: 0;
+  cursor: pointer;
+}
+
+.submit:hover:not(:disabled) {
+  background: #1b1948;
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.activate {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.activate a {
+  color: #0cc39b;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.form :is(input, button, a):focus-visible {
+  outline: 3px solid #0cc39b;
+  outline-offset: 2px;
+}
+
+@media (max-width: 800px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+  .brand {
+    padding: 28px 24px;
+  }
+  .message {
+    margin: 32px 0;
+  }
+  .message h1 {
+    font-size: 1.6rem;
+  }
+  .message p {
+    font-size: 1.05rem;
+  }
+  .dots {
+    display: none;
+  }
+}
+
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrapper .input {
+  width: 100%;
+  padding-right: 48px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  color: #25215f;
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid #00c99a;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

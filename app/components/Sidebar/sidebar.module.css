@@ -1,0 +1,123 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Logo row is as tall as the top bar; Figma centres the logo ~6px below the middle */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: var(--topbar-height);
+  padding-top: 10px;
+  padding-top: 30px;
+}
+
+/* Figma logo glyph is ~66px wide; the PNG has a little padding, so 90px wide */
+.logoImg {
+  width: 90px;
+  height: auto;
+  max-width: 80%;
+}
+
+/* Tiles are 99px tall. Home -> Batches gap 56px, Batches -> Batch Stages gap 10px */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.nav > :nth-child(2) {
+  margin-top: 46px;
+}
+
+/* Tile: 40px icon on top, 13px label 39px below the icon's centre */
+.link {
+  --icon-hole: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  height: 99px;
+  padding-top: 24px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 16px;
+  transition: background 0.15s ease;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+
+.linkActive,
+.linkActive:hover {
+  --icon-hole: var(--accent);
+  background: var(--accent);
+}
+
+/* Settings: pinned to the bottom under a white divider, icon beside label */
+.footer {
+  flex-shrink: 0;
+  border-top: 1px solid #fff;
+}
+
+.footer .link {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  height: 86px;
+  padding-top: 0;
+}
+
+@media (max-width: 640px) {
+  .link,
+  .footer .link {
+    height: 72px;
+    padding-top: 0;
+    justify-content: center;
+  }
+
+  .nav {
+    gap: 8px;
+  }
+
+  .nav > :nth-child(2) {
+    margin-top: 0;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .logoImg {
+    width: 44px;
+  }
+}

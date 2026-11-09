@@ -1,0 +1,1839 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Rica", "version": "0.1.0" },
+  "paths": {
+    "/processing-stages": {
+      "get": {
+        "tags": ["Processing Stages"],
+        "summary": "List Processing Stages",
+        "operationId": "list_processing_stages_processing_stages_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessingStageResponse"
+                  },
+                  "type": "array",
+                  "title": "Response List Processing Stages Processing Stages Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Processing Stages"],
+        "summary": "Create Processing Stage",
+        "operationId": "create_processing_stage_processing_stages_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ProcessingStageCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingStageResponse"
+                }
+              }
+            }
+          },
+          "409": { "description": "Duplicate name/order, or stage in use" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/processing-stages/{stage_id}": {
+      "get": {
+        "tags": ["Processing Stages"],
+        "summary": "Get Processing Stage",
+        "operationId": "get_processing_stage_processing_stages__stage_id__get",
+        "parameters": [
+          {
+            "name": "stage_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "maximum": 32767,
+              "exclusiveMinimum": 0,
+              "title": "Stage Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingStageResponse"
+                }
+              }
+            }
+          },
+          "404": { "description": "Processing stage not found" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Processing Stages"],
+        "summary": "Update Processing Stage",
+        "operationId": "update_processing_stage_processing_stages__stage_id__patch",
+        "parameters": [
+          {
+            "name": "stage_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "maximum": 32767,
+              "exclusiveMinimum": 0,
+              "title": "Stage Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ProcessingStageUpdate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingStageResponse"
+                }
+              }
+            }
+          },
+          "404": { "description": "Processing stage not found" },
+          "409": { "description": "Duplicate name/order, or stage in use" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Processing Stages"],
+        "summary": "Delete Processing Stage",
+        "operationId": "delete_processing_stage_processing_stages__stage_id__delete",
+        "parameters": [
+          {
+            "name": "stage_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "maximum": 32767,
+              "exclusiveMinimum": 0,
+              "title": "Stage Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Successful Response" },
+          "404": { "description": "Processing stage not found" },
+          "409": { "description": "Duplicate name/order, or stage in use" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scenario-results/{results_id}": {
+      "get": {
+        "tags": ["Scenario Results"],
+        "summary": "Get Scenario Result",
+        "operationId": "get_scenario_result_scenario_results__results_id__get",
+        "parameters": [
+          {
+            "name": "results_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Results Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schemas__scenario_results__ScenarioResultResponse"
+                }
+              }
+            }
+          },
+          "404": { "description": "Scenario or result not found" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scenarios/{scenario_id}/results": {
+      "get": {
+        "tags": ["Scenario Results"],
+        "summary": "List Scenario Results",
+        "operationId": "list_scenario_results_scenarios__scenario_id__results_get",
+        "parameters": [
+          {
+            "name": "scenario_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scenario Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/schemas__scenario_results__ScenarioResultResponse"
+                  },
+                  "title": "Response List Scenario Results Scenarios  Scenario Id  Results Get"
+                }
+              }
+            }
+          },
+          "404": { "description": "Scenario or result not found" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scenarios/{scenario_id}/results/{execution_number}": {
+      "get": {
+        "tags": ["Scenario Results"],
+        "summary": "Get Scenario Execution",
+        "operationId": "get_scenario_execution_scenarios__scenario_id__results__execution_number__get",
+        "parameters": [
+          {
+            "name": "scenario_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scenario Id"
+            }
+          },
+          {
+            "name": "execution_number",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "title": "Execution Number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schemas__scenario_results__ScenarioResultResponse"
+                }
+              }
+            }
+          },
+          "404": { "description": "Scenario or result not found" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/values/batches/{batch_id}/calculate": {
+      "post": {
+        "summary": "Calculate Batch Value",
+        "operationId": "calculate_batch_value_values_batches__batch_id__calculate_post",
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValueCalculationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/values/batches/{batch_id}/values": {
+      "get": {
+        "summary": "Get Values For Batch",
+        "operationId": "get_values_for_batch_values_batches__batch_id__values_get",
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ValueCalculationResponse"
+                  },
+                  "title": "Response Get Values For Batch Values Batches  Batch Id  Values Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/values/history/{history_id}/values": {
+      "get": {
+        "summary": "Get Values For History",
+        "operationId": "get_values_for_history_values_history__history_id__values_get",
+        "parameters": [
+          {
+            "name": "history_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "History Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ValueCalculationResponse"
+                  },
+                  "title": "Response Get Values For History Values History  History Id  Values Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scenarios/": {
+      "post": {
+        "tags": ["Scenarios"],
+        "summary": "Create Scenario",
+        "operationId": "create_scenario_scenarios__post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ScenarioCreate" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ScenarioResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Scenarios"],
+        "summary": "List Scenarios",
+        "operationId": "list_scenarios_scenarios__get",
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "uuid" },
+                { "type": "null" }
+              ],
+              "title": "Batch Id"
+            }
+          },
+          {
+            "name": "created_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "uuid" },
+                { "type": "null" }
+              ],
+              "title": "Created By"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ScenarioResponse" },
+                  "title": "Response List Scenarios Scenarios  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scenarios/{scenario_id}": {
+      "get": {
+        "tags": ["Scenarios"],
+        "summary": "Get Scenario",
+        "operationId": "get_scenario_scenarios__scenario_id__get",
+        "parameters": [
+          {
+            "name": "scenario_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scenario Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ScenarioResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Scenarios"],
+        "summary": "Update Scenario",
+        "operationId": "update_scenario_scenarios__scenario_id__put",
+        "parameters": [
+          {
+            "name": "scenario_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scenario Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ScenarioUpdate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ScenarioResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Scenarios"],
+        "summary": "Delete Scenario",
+        "operationId": "delete_scenario_scenarios__scenario_id__delete",
+        "parameters": [
+          {
+            "name": "scenario_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scenario Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Successful Response" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scenarios/{scenario_id}/execute": {
+      "post": {
+        "tags": ["Scenarios"],
+        "summary": "Execute Scenario",
+        "operationId": "execute_scenario_scenarios__scenario_id__execute_post",
+        "parameters": [
+          {
+            "name": "scenario_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scenario Id"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schemas__scenario__ScenarioResultResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mineral-batches": {
+      "get": {
+        "tags": ["Mineral Batches"],
+        "summary": "Get All Mineral Batches",
+        "operationId": "get_all_mineral_batches_mineral_batches_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/MineralBatchResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get All Mineral Batches Mineral Batches Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "HTTPBearer": [] }]
+      },
+      "post": {
+        "tags": ["Mineral Batches"],
+        "summary": "Register Mineral Batch",
+        "operationId": "register_mineral_batch_mineral_batches_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/MineralBatchCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MineralBatchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "HTTPBearer": [] }]
+      }
+    },
+    "/mineral-batches/search": {
+      "get": {
+        "tags": ["Mineral Batches"],
+        "summary": "Search Mineral Batches",
+        "operationId": "search_mineral_batches_mineral_batches_search_get",
+        "security": [{ "HTTPBearer": [] }],
+        "parameters": [
+          {
+            "name": "batch_code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "title": "Batch Code"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MineralBatchResponse"
+                  },
+                  "title": "Response Search Mineral Batches Mineral Batches Search Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mineral-batches/code/{batch_code}": {
+      "get": {
+        "tags": ["Mineral Batches"],
+        "summary": "Get Mineral Batch By Code",
+        "operationId": "get_mineral_batch_by_code_mineral_batches_code__batch_code__get",
+        "security": [{ "HTTPBearer": [] }],
+        "parameters": [
+          {
+            "name": "batch_code",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Batch Code" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MineralBatchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mineral-batches/code/{batch_code}/qr-code": {
+      "get": {
+        "tags": ["Mineral Batches"],
+        "summary": "Get Mineral Batch Qr Code",
+        "operationId": "get_mineral_batch_qr_code_mineral_batches_code__batch_code__qr_code_get",
+        "security": [{ "HTTPBearer": [] }],
+        "parameters": [
+          {
+            "name": "batch_code",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Batch Code" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mineral-batches/{batch_id}/upload-assay": {
+      "put": {
+        "tags": ["Mineral Batches"],
+        "summary": "Upload Assay Document",
+        "operationId": "upload_assay_document_mineral_batches__batch_id__upload_assay_put",
+        "security": [{ "HTTPBearer": [] }],
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_assay_document_mineral_batches__batch_id__upload_assay_put"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MineralBatchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["users"],
+        "summary": "List Users",
+        "operationId": "list_users_users_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserListResponse" }
+              }
+            }
+          }
+        },
+        "security": [{ "HTTPBearer": [] }]
+      },
+      "post": {
+        "tags": ["users"],
+        "summary": "Create User",
+        "operationId": "create_user_users_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "HTTPBearer": [] }]
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get Current User Profile",
+        "operationId": "get_current_user_profile_users_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserResponse" }
+              }
+            }
+          }
+        },
+        "security": [{ "HTTPBearer": [] }]
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get User",
+        "operationId": "get_user_users__user_id__get",
+        "security": [{ "HTTPBearer": [] }],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "User Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["users"],
+        "summary": "Update User",
+        "operationId": "update_user_users__user_id__patch",
+        "security": [{ "HTTPBearer": [] }],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "User Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserUpdate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["users"],
+        "summary": "Delete User",
+        "operationId": "delete_user_users__user_id__delete",
+        "security": [{ "HTTPBearer": [] }],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "User Id" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Successful Response" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/disable": {
+      "patch": {
+        "tags": ["users"],
+        "summary": "Disable User",
+        "operationId": "disable_user_users__user_id__disable_patch",
+        "security": [{ "HTTPBearer": [] }],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "User Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Login",
+        "operationId": "login_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TokenResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Logout",
+        "operationId": "logout_auth_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LogoutResponse" }
+              }
+            }
+          }
+        },
+        "security": [{ "HTTPBearer": [] }]
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": { "type": "string" },
+                  "type": "object",
+                  "title": "Response Health Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BatchStatus": {
+        "type": "string",
+        "enum": ["ACTIVE", "CLOSED"],
+        "title": "BatchStatus"
+      },
+      "Body_upload_assay_document_mineral_batches__batch_id__upload_assay_put": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": ["file"],
+        "title": "Body_upload_assay_document_mineral_batches__batch_id__upload_assay_put"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LoginRequest": {
+        "properties": {
+          "email": { "type": "string", "title": "Email" },
+          "password": { "type": "string", "title": "Password" }
+        },
+        "type": "object",
+        "required": ["email", "password"],
+        "title": "LoginRequest"
+      },
+      "LogoutResponse": {
+        "properties": { "detail": { "type": "string", "title": "Detail" } },
+        "type": "object",
+        "required": ["detail"],
+        "title": "LogoutResponse"
+      },
+      "MineralBatchCreate": {
+        "properties": {
+          "mineral_type": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Mineral Type",
+            "default": "COPPER"
+          },
+          "source_type": { "$ref": "#/components/schemas/SourceType" },
+          "stage_id": { "type": "integer", "title": "Stage Id" },
+          "quantity_tonnes": {
+            "anyOf": [
+              { "type": "number", "minimum": 0.0 },
+              { "type": "string" }
+            ],
+            "title": "Quantity Tonnes"
+          },
+          "grade": {
+            "anyOf": [
+              { "type": "number", "maximum": 1.0, "minimum": 0.0 },
+              { "type": "string" }
+            ],
+            "title": "Grade"
+          },
+          "recovery": {
+            "anyOf": [
+              { "type": "number", "maximum": 1.0, "minimum": 0.0 },
+              { "type": "string" },
+              { "type": "null" }
+            ],
+            "title": "Recovery"
+          }
+        },
+        "type": "object",
+        "required": ["source_type", "stage_id", "quantity_tonnes", "grade"],
+        "title": "MineralBatchCreate"
+      },
+      "MineralBatchResponse": {
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Created By"
+          },
+          "batch_code": { "type": "string", "title": "Batch Code" },
+          "mineral_type": { "type": "string", "title": "Mineral Type" },
+          "source_type": { "$ref": "#/components/schemas/SourceType" },
+          "quantity_tonnes": { "type": "string", "title": "Quantity Tonnes" },
+          "grade": { "type": "string", "title": "Grade" },
+          "recovery": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Recovery"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "status": { "$ref": "#/components/schemas/BatchStatus" },
+          "assay_original_filename": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Assay Original Filename"
+          }
+        },
+        "type": "object",
+        "required": [
+          "batch_id",
+          "created_by",
+          "batch_code",
+          "mineral_type",
+          "source_type",
+          "quantity_tonnes",
+          "grade",
+          "recovery",
+          "created_at",
+          "status"
+        ],
+        "title": "MineralBatchResponse"
+      },
+      "ProcessingStageCreate": {
+        "properties": {
+          "stage_name": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Stage Name"
+          },
+          "stage_order": {
+            "type": "integer",
+            "maximum": 32767.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Stage Order"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["stage_name", "stage_order"],
+        "title": "ProcessingStageCreate"
+      },
+      "ProcessingStageResponse": {
+        "properties": {
+          "stage_id": { "type": "integer", "title": "Stage Id" },
+          "stage_name": { "type": "string", "title": "Stage Name" },
+          "stage_order": { "type": "integer", "title": "Stage Order" }
+        },
+        "type": "object",
+        "required": ["stage_id", "stage_name", "stage_order"],
+        "title": "ProcessingStageResponse"
+      },
+      "ProcessingStageUpdate": {
+        "properties": {
+          "stage_name": {
+            "anyOf": [
+              { "type": "string", "maxLength": 100, "minLength": 1 },
+              { "type": "null" }
+            ],
+            "title": "Stage Name"
+          },
+          "stage_order": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 32767.0,
+                "exclusiveMinimum": 0.0
+              },
+              { "type": "null" }
+            ],
+            "title": "Stage Order"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ProcessingStageUpdate"
+      },
+      "ScenarioCreate": {
+        "properties": {
+          "scenario_name": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "title": "Scenario Name"
+          },
+          "assumed_quantity": {
+            "anyOf": [
+              { "type": "number", "minimum": 0.0 },
+              { "type": "string" }
+            ],
+            "title": "Assumed Quantity"
+          },
+          "assumed_grade": {
+            "anyOf": [
+              { "type": "number", "maximum": 1.0, "minimum": 0.0 },
+              { "type": "string" }
+            ],
+            "title": "Assumed Grade"
+          },
+          "assumed_recovery": {
+            "anyOf": [
+              { "type": "number", "maximum": 1.0, "minimum": 0.0 },
+              { "type": "string" }
+            ],
+            "title": "Assumed Recovery"
+          },
+          "assumed_price": {
+            "anyOf": [
+              { "type": "number", "exclusiveMinimum": 0.0 },
+              { "type": "string" }
+            ],
+            "title": "Assumed Price"
+          },
+          "assumed_stage_id": {
+            "type": "integer",
+            "title": "Assumed Stage Id"
+          },
+          "price_unit": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 1,
+            "title": "Price Unit"
+          },
+          "currency": {
+            "type": "string",
+            "maxLength": 3,
+            "minLength": 3,
+            "title": "Currency"
+          },
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "baseline_calculation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Baseline Calculation Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "scenario_name",
+          "assumed_quantity",
+          "assumed_grade",
+          "assumed_recovery",
+          "assumed_price",
+          "assumed_stage_id",
+          "price_unit",
+          "currency",
+          "batch_id",
+          "baseline_calculation_id"
+        ],
+        "title": "ScenarioCreate"
+      },
+      "ScenarioResponse": {
+        "properties": {
+          "scenario_name": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "title": "Scenario Name"
+          },
+          "assumed_quantity": { "type": "string", "title": "Assumed Quantity" },
+          "assumed_grade": { "type": "string", "title": "Assumed Grade" },
+          "assumed_recovery": { "type": "string", "title": "Assumed Recovery" },
+          "assumed_price": { "type": "string", "title": "Assumed Price" },
+          "assumed_stage_id": {
+            "type": "integer",
+            "title": "Assumed Stage Id"
+          },
+          "price_unit": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 1,
+            "title": "Price Unit"
+          },
+          "currency": {
+            "type": "string",
+            "maxLength": 3,
+            "minLength": 3,
+            "title": "Currency"
+          },
+          "scenario_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Scenario Id"
+          },
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "baseline_calculation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Baseline Calculation Id"
+          },
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Created By"
+          }
+        },
+        "type": "object",
+        "required": [
+          "scenario_name",
+          "assumed_quantity",
+          "assumed_grade",
+          "assumed_recovery",
+          "assumed_price",
+          "assumed_stage_id",
+          "price_unit",
+          "currency",
+          "scenario_id",
+          "batch_id",
+          "baseline_calculation_id",
+          "created_by"
+        ],
+        "title": "ScenarioResponse"
+      },
+      "ScenarioUpdate": {
+        "properties": {
+          "scenario_name": {
+            "anyOf": [
+              { "type": "string", "maxLength": 150, "minLength": 1 },
+              { "type": "null" }
+            ],
+            "title": "Scenario Name"
+          },
+          "assumed_quantity": {
+            "anyOf": [
+              { "type": "number", "minimum": 0.0 },
+              { "type": "string" },
+              { "type": "null" }
+            ],
+            "title": "Assumed Quantity"
+          },
+          "assumed_grade": {
+            "anyOf": [
+              { "type": "number", "maximum": 1.0, "minimum": 0.0 },
+              { "type": "string" },
+              { "type": "null" }
+            ],
+            "title": "Assumed Grade"
+          },
+          "assumed_recovery": {
+            "anyOf": [
+              { "type": "number", "maximum": 1.0, "minimum": 0.0 },
+              { "type": "string" },
+              { "type": "null" }
+            ],
+            "title": "Assumed Recovery"
+          },
+          "assumed_price": {
+            "anyOf": [
+              { "type": "number", "exclusiveMinimum": 0.0 },
+              { "type": "string" },
+              { "type": "null" }
+            ],
+            "title": "Assumed Price"
+          },
+          "assumed_stage_id": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Assumed Stage Id"
+          },
+          "price_unit": {
+            "anyOf": [
+              { "type": "string", "maxLength": 30, "minLength": 1 },
+              { "type": "null" }
+            ],
+            "title": "Price Unit"
+          },
+          "currency": {
+            "anyOf": [
+              { "type": "string", "maxLength": 3, "minLength": 3 },
+              { "type": "null" }
+            ],
+            "title": "Currency"
+          }
+        },
+        "type": "object",
+        "title": "ScenarioUpdate"
+      },
+      "SourceType": {
+        "type": "string",
+        "enum": ["SELF_EXTRACTED", "PURCHASED"],
+        "title": "SourceType"
+      },
+      "TokenResponse": {
+        "properties": {
+          "access_token": { "type": "string", "title": "Access Token" },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type",
+            "default": "bearer"
+          }
+        },
+        "type": "object",
+        "required": ["access_token"],
+        "title": "TokenResponse"
+      },
+      "UserCreate": {
+        "properties": {
+          "email": { "type": "string", "title": "Email" },
+          "password": { "type": "string", "title": "Password" },
+          "first_name": { "type": "string", "title": "First Name" },
+          "last_name": { "type": "string", "title": "Last Name" },
+          "role": {
+            "$ref": "#/components/schemas/UserRole",
+            "default": "OPERATIONS_MANAGER"
+          }
+        },
+        "type": "object",
+        "required": ["email", "password", "first_name", "last_name"],
+        "title": "UserCreate"
+      },
+      "UserListResponse": {
+        "properties": {
+          "users": {
+            "items": { "$ref": "#/components/schemas/UserResponse" },
+            "type": "array",
+            "title": "Users"
+          },
+          "total": { "type": "integer", "title": "Total" }
+        },
+        "type": "object",
+        "required": ["users", "total"],
+        "title": "UserListResponse"
+      },
+      "UserResponse": {
+        "properties": {
+          "user_id": { "type": "string", "title": "User Id" },
+          "email": { "type": "string", "title": "Email" },
+          "first_name": { "type": "string", "title": "First Name" },
+          "last_name": { "type": "string", "title": "Last Name" },
+          "role": { "type": "string", "title": "Role" },
+          "account_status": { "type": "string", "title": "Account Status" }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "email",
+          "first_name",
+          "last_name",
+          "role",
+          "account_status"
+        ],
+        "title": "UserResponse"
+      },
+      "UserRole": {
+        "type": "string",
+        "enum": [
+          "SYSTEM_ADMINISTRATOR",
+          "SUPPLY_CHAIN_MANAGER",
+          "OPERATIONS_MANAGER"
+        ],
+        "title": "UserRole"
+      },
+      "UserUpdate": {
+        "properties": {
+          "email": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Email"
+          },
+          "first_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "First Name"
+          },
+          "last_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Last Name"
+          },
+          "role": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/UserRole" },
+              { "type": "null" }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "UserUpdate"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" },
+          "input": { "title": "Input" },
+          "ctx": { "type": "object", "title": "Context" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "ValueCalculationResponse": {
+        "properties": {
+          "calculation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Calculation Id"
+          },
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "batch_history_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch History Id"
+          },
+          "stage_id": { "type": "integer", "title": "Stage Id" },
+          "quantity": { "type": "string", "title": "Quantity" },
+          "quantity_unit": {
+            "type": "string",
+            "title": "Quantity Unit",
+            "default": "tonnes"
+          },
+          "grade": { "type": "string", "title": "Grade" },
+          "recovery": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Recovery"
+          },
+          "reference_price": { "type": "string", "title": "Reference Price" },
+          "price_unit": {
+            "type": "string",
+            "title": "Price Unit",
+            "default": "USD/tonne"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency",
+            "default": "USD"
+          },
+          "price_source": {
+            "type": "string",
+            "title": "Price Source",
+            "default": "Metals-API (LME copper)"
+          },
+          "price_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Price Date"
+          },
+          "contained_metal_tonnes": {
+            "type": "string",
+            "title": "Contained Metal Tonnes"
+          },
+          "recoverable_metal_tonnes": {
+            "type": "string",
+            "title": "Recoverable Metal Tonnes"
+          },
+          "calculated_value": { "type": "string", "title": "Calculated Value" },
+          "calculated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Calculated At"
+          },
+          "calculated_by": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Calculated By"
+          }
+        },
+        "type": "object",
+        "required": [
+          "calculation_id",
+          "batch_id",
+          "batch_history_id",
+          "stage_id",
+          "quantity",
+          "grade",
+          "reference_price",
+          "price_date",
+          "contained_metal_tonnes",
+          "recoverable_metal_tonnes",
+          "calculated_value",
+          "calculated_at",
+          "calculated_by"
+        ],
+        "title": "ValueCalculationResponse"
+      },
+      "schemas__scenario__ScenarioResultResponse": {
+        "properties": {
+          "results_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Results Id"
+          },
+          "scenario_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Scenario Id"
+          },
+          "execution_number": {
+            "type": "integer",
+            "title": "Execution Number"
+          },
+          "simulated_value": { "type": "string", "title": "Simulated Value" },
+          "baseline_value": { "type": "string", "title": "Baseline Value" },
+          "value_difference": { "type": "string", "title": "Value Difference" },
+          "percentage_difference": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Percentage Difference"
+          },
+          "calculated_at": { "title": "Calculated At" }
+        },
+        "type": "object",
+        "required": [
+          "results_id",
+          "scenario_id",
+          "execution_number",
+          "simulated_value",
+          "baseline_value",
+          "value_difference",
+          "percentage_difference",
+          "calculated_at"
+        ],
+        "title": "ScenarioResultResponse"
+      },
+      "schemas__scenario_results__ScenarioResultResponse": {
+        "properties": {
+          "results_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Results Id"
+          },
+          "scenario_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Scenario Id"
+          },
+          "execution_number": {
+            "type": "integer",
+            "title": "Execution Number"
+          },
+          "simulated_value": { "type": "string", "title": "Simulated Value" },
+          "baseline_value": { "type": "string", "title": "Baseline Value" },
+          "value_difference": { "type": "string", "title": "Value Difference" },
+          "percentage_difference": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Percentage Difference"
+          },
+          "calculated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Calculated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "results_id",
+          "scenario_id",
+          "execution_number",
+          "simulated_value",
+          "baseline_value",
+          "value_difference",
+          "percentage_difference",
+          "calculated_at"
+        ],
+        "title": "ScenarioResultResponse"
+      }
+    },
+    "securitySchemes": { "HTTPBearer": { "type": "http", "scheme": "bearer" } }
+  }
+}

@@ -1,0 +1,96 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: #ffffff;
+  color: #1b1a45;
+  font-family:
+    "Instrument Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 14px 40px;
+  border-bottom: 1px solid #1b1a45;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: #0cc39b;
+  background: #25225f;
+  border-radius: 50%;
+}
+
+.content {
+  padding: 24px 40px 48px;
+}
+
+.content h1 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+}
+
+.sub {
+  margin: 0 0 32px;
+  color: #4a4a6a;
+}
+
+.alert {
+  margin: 0 0 16px;
+  color: #c0392b;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid #e2e2ea;
+  border-radius: 10px;
+  background: #fbfbfd;
+}
+
+.cardTitle {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.cardSub {
+  margin: 0 0 16px;
+  color: #4a4a6a;
+  font-size: 0.95rem;
+}
+
+.cardLink {
+  margin-top: auto;
+  color: #0cc39b;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.cardLink:hover {
+  text-decoration: underline;
+}
